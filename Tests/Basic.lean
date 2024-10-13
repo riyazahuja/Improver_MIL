@@ -82,10 +82,3 @@ example (h : ¬ (P ∧ Q)) : P → ¬ Q := by
   intro hp hq
   apply h
   exact ⟨hp,hq⟩
-
-
-
-example (h : ∃ x ∈ s, ¬Even x ∧ Prime x) : ∃ x ∈ t, Prime x  := by
-  rcases h with ⟨x, xs, _, px⟩
-  have xt : x ∈ t := ssubt xs
-  use x, use xt
