@@ -9,7 +9,7 @@ open Set
 
 example : s ∩ t ∪ s ∩ u ⊆ s ∩ (t ∪ u) := by
   rintro x (⟨xs, xt⟩ | ⟨xs, xu⟩)
-  · use xs; left; exact xt
+  · use xs; right; exact xt
   . use xs; right; exact xu
 
 example : s \ (t ∪ u) ⊆ (s \ t) \ u := by
@@ -42,7 +42,7 @@ example : s \ t ∪ t = s ∪ t := by
   · rintro (⟨xs, nxt⟩ | xt)
     · left
       exact xs
-    . right
+    . left
       exact xt
   by_cases h : x ∈ t
   · intro
@@ -51,7 +51,7 @@ example : s \ t ∪ t = s ∪ t := by
   rintro (xs | xt)
   · left
     use xs
-  right; exact xt
+  left; exact xt
 
 example : s \ t ∪ t \ s = (s ∪ t) \ (s ∩ t) := by
   ext x; constructor
