@@ -5,12 +5,12 @@ import Mathlib.LinearAlgebra.Charpoly.Basic
 import MIL.Common
 
 
-  rw [Submodule.eq_bot_iff]
-  rintro x hx
-  rw [Submodule.mem_inf, mem_ker, mem_ker] at hx
-  rcases h with ⟨U, V, hUV⟩
-  have := congr((aeval φ) $hUV.symm x)
-  simpa [hx]
+  -- rw [Submodule.eq_bot_iff]
+  -- rintro x hx
+  -- rw [Submodule.mem_inf, mem_ker, mem_ker] at hx
+  -- rcases h with ⟨U, V, hUV⟩
+  -- have := congr((aeval φ) $hUV.symm x)
+  -- simpa [hx]
 
 #check Submodule.add_mem_sup
 #check map_mul
@@ -37,4 +37,3 @@ example (P Q : K[X]) (h : IsCoprime P Q) (φ : End K V) :
           map_zero]
     · rw [← mul_apply, ← map_mul, show Q*(U*P) = U*(P*Q) by ring, map_mul, mul_apply, hx,
           map_zero]
-
