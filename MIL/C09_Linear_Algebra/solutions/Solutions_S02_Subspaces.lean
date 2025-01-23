@@ -4,7 +4,7 @@ import Mathlib.LinearAlgebra.Charpoly.Basic
 
 import MIL.Common
 
-def preimage {W : Type*} [AddCommGroup W] [Module K W] (φ : V →ₗ[K] W) (H : Submodule K W) :
+def preimage {W V K: Type*} [AddCommGroup W] [AddCommGroup V] [Field K] [Module K W] (φ : V →ₗ[K] W) (H : Submodule K W) :
     Submodule K V where
   carrier := φ ⁻¹' H
   zero_mem' := by
