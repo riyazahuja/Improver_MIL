@@ -4,13 +4,13 @@ import Mathlib.Topology.Instances.Real
 open Set Filter Topology
 
 -- In the next example we could use `tauto` in each proof instead of knowing the lemmas
-example {α : Type*} (s : Set α) : Filter α :=
+def t1 {α : Type*} (s : Set α) : Filter α :=
   { sets := { t | s ⊆ t }
     univ_sets := subset_univ s
     sets_of_superset := fun hU hUV ↦ Subset.trans hU hUV
     inter_sets := fun hU hV ↦ subset_inter hU hV }
 
-example : Filter ℕ :=
+def t2 : Filter ℕ :=
   { sets := { s | ∃ a, ∀ b, a ≤ b → b ∈ s }
     univ_sets := by
       use 42
@@ -29,7 +29,7 @@ example : Filter ℕ :=
 def Tendsto₁ {X Y : Type*} (f : X → Y) (F : Filter X) (G : Filter Y) :=
   ∀ V ∈ G, f ⁻¹' V ∈ F
 
-example {X Y Z : Type*} {F : Filter X} {G : Filter Y} {H : Filter Z} {f : X → Y} {g : Y → Z}
+theorem t3 {X Y Z : Type*} {F : Filter X} {G : Filter Y} {H : Filter Z} {f : X → Y} {g : Y → Z}
     (hf : Tendsto₁ f F G) (hg : Tendsto₁ g G H) : Tendsto₁ (g ∘ f) F H :=
   calc
     map (g ∘ f) F = map g (map f F) := by rw [map_map]
@@ -37,7 +37,7 @@ example {X Y Z : Type*} {F : Filter X} {G : Filter Y} {H : Filter Z} {f : X → 
     _ ≤ H := hg
 
 
-example {X Y Z : Type*} {F : Filter X} {G : Filter Y} {H : Filter Z} {f : X → Y} {g : Y → Z}
+theorem t4 {X Y Z : Type*} {F : Filter X} {G : Filter Y} {H : Filter Z} {f : X → Y} {g : Y → Z}
     (hf : Tendsto₁ f F G) (hg : Tendsto₁ g G H) : Tendsto₁ (g ∘ f) F H := by
   intro V hV
   rw [preimage_comp]
@@ -45,7 +45,7 @@ example {X Y Z : Type*} {F : Filter X} {G : Filter Y} {H : Filter Z} {f : X → 
   apply hg
   exact hV
 
-example (f : ℕ → ℝ × ℝ) (x₀ y₀ : ℝ) :
+theorem t5 (f : ℕ → ℝ × ℝ) (x₀ y₀ : ℝ) :
     Tendsto f atTop (𝓝 (x₀, y₀)) ↔
       Tendsto (Prod.fst ∘ f) atTop (𝓝 x₀) ∧ Tendsto (Prod.snd ∘ f) atTop (𝓝 y₀) :=
   calc
@@ -60,13 +60,13 @@ example (f : ℕ → ℝ × ℝ) (x₀ y₀ : ℝ) :
 
 
 -- an alternative solution
-example (f : ℕ → ℝ × ℝ) (x₀ y₀ : ℝ) :
+theorem t6 (f : ℕ → ℝ × ℝ) (x₀ y₀ : ℝ) :
     Tendsto f atTop (𝓝 (x₀, y₀)) ↔
       Tendsto (Prod.fst ∘ f) atTop (𝓝 x₀) ∧ Tendsto (Prod.snd ∘ f) atTop (𝓝 y₀) := by
   rw [nhds_prod_eq]
   unfold Tendsto SProd.sprod Filter.instSProd
   rw [le_inf_iff, ← map_le_iff_le_comap, map_map, ← map_le_iff_le_comap, map_map]
 
-example (u : ℕ → ℝ) (M : Set ℝ) (x : ℝ) (hux : Tendsto u atTop (𝓝 x))
+theorem t7 (u : ℕ → ℝ) (M : Set ℝ) (x : ℝ) (hux : Tendsto u atTop (𝓝 x))
     (huM : ∀ᶠ n in atTop, u n ∈ M) : x ∈ closure M :=
   mem_closure_iff_clusterPt.mpr (neBot_of_le <| le_inf hux <| le_principal_iff.mpr huM)

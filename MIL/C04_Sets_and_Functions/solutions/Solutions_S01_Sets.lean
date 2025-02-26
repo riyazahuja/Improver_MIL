@@ -7,12 +7,12 @@ variable {α : Type*}
 variable (s t u : Set α)
 open Set
 
-example : s ∩ t ∪ s ∩ u ⊆ s ∩ (t ∪ u) := by
+theorem t1 : s ∩ t ∪ s ∩ u ⊆ s ∩ (t ∪ u) := by
   rintro x (⟨xs, xt⟩ | ⟨xs, xu⟩)
   · use xs; left; exact xt
   · use xs; right; exact xu
 
-example : s \ (t ∪ u) ⊆ (s \ t) \ u := by
+theorem t2 : s \ (t ∪ u) ⊆ (s \ t) \ u := by
   rintro x ⟨xs, xntu⟩
   constructor
   use xs
@@ -21,23 +21,23 @@ example : s \ (t ∪ u) ⊆ (s \ t) \ u := by
   intro xu
   apply xntu (Or.inr xu)
 
-example : s ∩ t = t ∩ s :=
+theorem t3 : s ∩ t = t ∩ s :=
     Subset.antisymm
     (fun x ⟨xs, xt⟩ ↦ ⟨xt, xs⟩) fun x ⟨xt, xs⟩ ↦ ⟨xs, xt⟩
 
-example : s ∩ (s ∪ t) = s := by
+theorem t4 : s ∩ (s ∪ t) = s := by
   ext x; constructor
   · rintro ⟨xs, _⟩
     exact xs
   · intro xs
     use xs; left; exact xs
 
-example : s ∪ s ∩ t = s := by
+theorem t5 : s ∪ s ∩ t = s := by
   ext x; constructor
   · rintro (xs | ⟨xs, xt⟩) <;> exact xs
   · intro xs; left; exact xs
 
-example : s \ t ∪ t = s ∪ t := by
+theorem t6 : s \ t ∪ t = s ∪ t := by
   ext x; constructor
   · rintro (⟨xs, nxt⟩ | xt)
     · left
@@ -53,7 +53,7 @@ example : s \ t ∪ t = s ∪ t := by
     use xs
   right; exact xt
 
-example : s \ t ∪ t \ s = (s ∪ t) \ (s ∩ t) := by
+theorem t7 : s \ t ∪ t \ s = (s ∪ t) \ (s ∩ t) := by
   ext x; constructor
   · rintro (⟨xs, xnt⟩ | ⟨xt, xns⟩)
     · constructor
@@ -76,7 +76,7 @@ example : s \ t ∪ t \ s = (s ∪ t) \ (s ∩ t) := by
     apply nxst
     constructor <;> assumption
 
-example : { n | Nat.Prime n } ∩ { n | n > 2 } ⊆ { n | ¬Even n } := by
+theorem t8 : { n | Nat.Prime n } ∩ { n | n > 2 } ⊆ { n | ¬Even n } := by
   intro n
   simp
   intro nprime n_gt
@@ -91,20 +91,16 @@ section
 
 variable (s t : Set ℕ)
 
-section
-variable (ssubt : s ⊆ t)
 
-example (h₀ : ∀ x ∈ t, ¬Even x) (h₁ : ∀ x ∈ t, Prime x) : ∀ x ∈ s, ¬Even x ∧ Prime x := by
+theorem t9 (h₀ : ∀ x ∈ t, ¬Even x) (h₁ : ∀ x ∈ t, Prime x) (ssubt : s ⊆ t) : ∀ x ∈ s, ¬Even x ∧ Prime x := by
   intro x xs
   constructor
   · apply h₀ x (ssubt xs)
   apply h₁ x (ssubt xs)
 
-example (h : ∃ x ∈ s, ¬Even x ∧ Prime x) : ∃ x ∈ t, Prime x := by
+theorem t10 (h : ∃ x ∈ s, ¬Even x ∧ Prime x) (ssubt : s ⊆ t) : ∃ x ∈ t, Prime x := by
   rcases h with ⟨x, xs, _, px⟩
   use x, ssubt xs
-
-end
 
 end
 
@@ -115,7 +111,7 @@ variable (s : Set α)
 
 open Set
 
-example : (s ∪ ⋂ i, A i) = ⋂ i, A i ∪ s := by
+theorem t11 : (s ∪ ⋂ i, A i) = ⋂ i, A i ∪ s := by
   ext x
   simp only [mem_union, mem_iInter]
   constructor
@@ -139,7 +135,7 @@ example : (s ∪ ⋂ i, A i) = ⋂ i, A i ∪ s := by
 def primes : Set ℕ :=
   { x | Nat.Prime x }
 
-example : (⋃ p ∈ primes, { x | x ≤ p }) = univ := by
+theorem t12 : (⋃ p ∈ primes, { x | x ≤ p }) = univ := by
   apply eq_univ_of_forall
   intro x
   simp
@@ -147,4 +143,3 @@ example : (⋃ p ∈ primes, { x | x ≤ p }) = univ := by
   use p, primep
 
 end
-
