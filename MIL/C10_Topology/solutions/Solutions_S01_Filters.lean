@@ -1,5 +1,5 @@
 import MIL.Common
-import Mathlib.Topology.Instances.Real.Defs
+import Mathlib.Topology.Instances.Real
 
 open Set Filter Topology
 
