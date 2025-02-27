@@ -1,7 +1,7 @@
 import MIL.Common
 import Mathlib.Data.Real.Basic
 
-namespace C03S01
+namespace CH03
 
 theorem my_lemma4 :
     ∀ {x y ε : ℝ}, 0 < ε → ε ≤ 1 → |x| < ε → |y| < ε → |x * y| < ε := by

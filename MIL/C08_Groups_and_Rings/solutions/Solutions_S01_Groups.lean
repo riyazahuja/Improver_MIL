@@ -5,6 +5,8 @@ import Mathlib.GroupTheory.PresentedGroup
 
 import MIL.Common
 
+namespace CH08
+
 def conjugate {G : Type*} [Group G] (x : G) (H : Subgroup G) : Subgroup G where
   carrier := {a : G | ∃ h, h ∈ H ∧ a = x * h * x⁻¹}
   one_mem' := by

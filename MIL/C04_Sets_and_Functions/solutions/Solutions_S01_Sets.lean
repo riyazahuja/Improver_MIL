@@ -2,6 +2,7 @@ import Mathlib.Data.Set.Lattice
 import Mathlib.Data.Nat.Prime.Basic
 import MIL.Common
 
+namespace CH04
 section
 variable {α : Type*}
 variable (s t u : Set α)

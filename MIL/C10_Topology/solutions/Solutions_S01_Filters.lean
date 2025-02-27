@@ -2,7 +2,7 @@ import MIL.Common
 import Mathlib.Topology.Instances.Real
 
 open Set Filter Topology
-
+namespace CH10
 -- In the next example we could use `tauto` in each proof instead of knowing the lemmas
 def t1 {α : Type*} (s : Set α) : Filter α :=
   { sets := { t | s ⊆ t }
