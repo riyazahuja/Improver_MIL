@@ -73,10 +73,10 @@ end MyAbs
 
 end
 
-example {z : ℝ} (h : ∃ x y, z = x ^ 2 + y ^ 2 ∨ z = x ^ 2 + y ^ 2 + 1) : z ≥ 0 := by
+theorem MIL_C3S5_1 {z : ℝ} (h : ∃ x y, z = x ^ 2 + y ^ 2 ∨ z = x ^ 2 + y ^ 2 + 1) : z ≥ 0 := by
   rcases h with ⟨x, y, rfl | rfl⟩ <;> linarith [sq_nonneg x, sq_nonneg y]
 
-example {x : ℝ} (h : x ^ 2 = 1) : x = 1 ∨ x = -1 := by
+theorem MIL_C3S5_2 {x : ℝ} (h : x ^ 2 = 1) : x = 1 ∨ x = -1 := by
   have h' : x ^ 2 - 1 = 0 := by rw [h, sub_self]
   have h'' : (x + 1) * (x - 1) = 0 := by
     rw [← h']
@@ -87,7 +87,7 @@ example {x : ℝ} (h : x ^ 2 = 1) : x = 1 ∨ x = -1 := by
   . left
     exact eq_of_sub_eq_zero h1
 
-example {x y : ℝ} (h : x ^ 2 = y ^ 2) : x = y ∨ x = -y := by
+theorem MIL_C3S5_3 {x y : ℝ} (h : x ^ 2 = y ^ 2) : x = y ∨ x = -y := by
   have h' : x ^ 2 - y ^ 2 = 0 := by rw [h, sub_self]
   have h'' : (x + y) * (x - y) = 0 := by
     rw [← h']
@@ -102,7 +102,7 @@ section
 variable {R : Type*} [CommRing R] [IsDomain R]
 variable (x y : R)
 
-example (h : x ^ 2 = 1) : x = 1 ∨ x = -1 := by
+theorem MIL_C3S5_4 (h : x ^ 2 = 1) : x = 1 ∨ x = -1 := by
   have h' : x ^ 2 - 1 = 0 := by rw [h, sub_self]
   have h'' : (x + 1) * (x - 1) = 0 := by
     rw [← h']
@@ -113,7 +113,7 @@ example (h : x ^ 2 = 1) : x = 1 ∨ x = -1 := by
   . left
     exact eq_of_sub_eq_zero h1
 
-example (h : x ^ 2 = y ^ 2) : x = y ∨ x = -y := by
+theorem MIL_C3S5_5 (h : x ^ 2 = y ^ 2) : x = y ∨ x = -y := by
   have h' : x ^ 2 - y ^ 2 = 0 := by rw [h, sub_self]
   have h'' : (x + y) * (x - y) = 0 := by
     rw [← h']
@@ -126,7 +126,7 @@ example (h : x ^ 2 = y ^ 2) : x = y ∨ x = -y := by
 
 end
 
-example (P Q : Prop) : P → Q ↔ ¬P ∨ Q := by
+theorem MIL_C3S5_6 (P Q : Prop) : P → Q ↔ ¬P ∨ Q := by
   constructor
   · intro h
     by_cases h' : P

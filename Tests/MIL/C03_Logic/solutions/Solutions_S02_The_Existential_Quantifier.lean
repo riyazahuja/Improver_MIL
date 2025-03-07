@@ -25,14 +25,14 @@ section
 
 variable {f g : ℝ → ℝ}
 
-example (lbf : FnHasLb f) (lbg : FnHasLb g) : FnHasLb fun x ↦ f x + g x := by
+theorem MIL_C3S2_1 (lbf : FnHasLb f) (lbg : FnHasLb g) : FnHasLb fun x ↦ f x + g x := by
   rcases lbf with ⟨a, lbfa⟩
   rcases lbg with ⟨b, lbgb⟩
   use a + b
   intro x
   exact add_le_add (lbfa x) (lbgb x)
 
-example {c : ℝ} (ubf : FnHasUb f) (h : c ≥ 0) : FnHasUb fun x ↦ c * f x := by
+theorem MIL_C3S2_2 {c : ℝ} (ubf : FnHasUb f) (h : c ≥ 0) : FnHasUb fun x ↦ c * f x := by
   rcases ubf with ⟨a, ubfa⟩
   use c * a
   intro x
@@ -43,12 +43,12 @@ end
 section
 variable {a b c : ℕ}
 
-example (divab : a ∣ b) (divbc : b ∣ c) : a ∣ c := by
+theorem MIL_C3S2_3 (divab : a ∣ b) (divbc : b ∣ c) : a ∣ c := by
   rcases divab with ⟨d, rfl⟩
   rcases divbc with ⟨e, rfl⟩
   use d * e; ring
 
-example (divab : a ∣ b) (divac : a ∣ c) : a ∣ b + c := by
+theorem MIL_C3S2_4 (divab : a ∣ b) (divac : a ∣ c) : a ∣ b + c := by
   rcases divab with ⟨d, rfl⟩
   rcases divac with ⟨e, rfl⟩
   use d + e; ring
@@ -59,12 +59,12 @@ section
 
 open Function
 
-example {c : ℝ} (h : c ≠ 0) : Surjective fun x ↦ c * x := by
+theorem MIL_C3S2_5 {c : ℝ} (h : c ≠ 0) : Surjective fun x ↦ c * x := by
   intro x
   use x / c
   dsimp; rw [mul_div_cancel₀ _ h]
 
-example {c : ℝ} (h : c ≠ 0) : Surjective fun x ↦ c * x := by
+theorem MIL_C3S2_6 {c : ℝ} (h : c ≠ 0) : Surjective fun x ↦ c * x := by
   intro x
   use x / c
   field_simp
@@ -76,7 +76,7 @@ open Function
 variable {α : Type*} {β : Type*} {γ : Type*}
 variable {g : β → γ} {f : α → β}
 
-example (surjg : Surjective g) (surjf : Surjective f) : Surjective fun x ↦ g (f x) := by
+theorem MIL_C3S2_7 (surjg : Surjective g) (surjf : Surjective f) : Surjective fun x ↦ g (f x) := by
   intro z
   rcases surjg z with ⟨y, rfl⟩
   rcases surjf y with ⟨x, rfl⟩
