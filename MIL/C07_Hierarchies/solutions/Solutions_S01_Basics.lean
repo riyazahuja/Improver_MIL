@@ -248,22 +248,22 @@ class PartialOrder₁ (α : Type)
   extends Preorder₁ α where
   le_antisymm : ∀ a b : α, a ≤₁ b → b ≤₁ a → a = b
 
-class OrderedCommMonoid₁ (α : Type)
-  extends PartialOrder₁ α, CommMonoid₃ α where
-  mul_of_le : ∀ a b : α, a ≤₁ b → ∀ c : α, c * a ≤₁ c * b
+-- class OrderedCommMonoid₁ (α : Type)
+--   extends PartialOrder₁ α, CommMonoid₃ α where
+--   mul_of_le : ∀ a b : α, a ≤₁ b → ∀ c : α, c * a ≤₁ c * b
 
-instance : OrderedCommMonoid₁ ℕ where
-  le := (· ≤ ·)
-  le_refl := fun _ ↦ le_rfl
-  le_trans := fun _ _ _ ↦ le_trans
-  le_antisymm := fun _ _ ↦ le_antisymm
-  mul := (· * ·)
-  mul_assoc₃ := mul_assoc
-  one := 1
-  one_mul := one_mul
-  mul_one := mul_one
-  mul_comm := mul_comm
-  mul_of_le := fun _ _ h c ↦ Nat.mul_le_mul_left c h
+-- instance : OrderedCommMonoid₁ ℕ where
+--   le := (· ≤ ·)
+--   le_refl := fun _ ↦ le_rfl
+--   le_trans := fun _ _ _ ↦ le_trans
+--   le_antisymm := fun _ _ ↦ le_antisymm
+--   mul := (· * ·)
+--   mul_assoc₃ := mul_assoc
+--   one := 1
+--   one_mul := one_mul
+--   mul_one := mul_one
+--   mul_comm := mul_comm
+--   mul_of_le := fun _ _ h c ↦ Nat.mul_le_mul_left c h
 
 class SMul₃ (α : Type) (β : Type) where
   /-- Scalar multiplication -/
