@@ -7,11 +7,11 @@ import MIL.Common
 
 variable {K : Type*} [Field K] {V : Type*} [AddCommGroup V] [Module K V]
 
-example (U : Submodule K V) {x y : V} (hx : x ∈ U) (hy : y ∈ U) :
+theorem C09_S02_0(U : Submodule K V) {x y : V} (hx : x ∈ U) (hy : y ∈ U) :
     x + y ∈ U :=
   U.add_mem hx hy
 
-example (U : Submodule K V) {x : V} (hx : x ∈ U) (a : K) :
+theorem C09_S02_1(U : Submodule K V) {x : V} (hx : x ∈ U) (a : K) :
     a • x ∈ U :=
   U.smul_mem a hx
 
@@ -34,7 +34,7 @@ def preimage {W : Type*} [AddCommGroup W] [Module K W] (φ : V →ₗ[K] W) (H :
     exact H.smul_mem a hv
 
 
-example {S T : Submodule K V} {x : V} (h : x ∈ S ⊔ T) :
+theorem C09_S02_2{S T : Submodule K V} {x : V} (h : x ∈ S ⊔ T) :
     ∃ s ∈ S, ∃ t ∈ T, x = s + t  := by
   rw [← S.span_eq, ← T.span_eq, ← Submodule.span_union] at h
   induction h using Submodule.span_induction with
@@ -71,15 +71,15 @@ variable (F : Submodule K W) in
 
 open Function LinearMap
 
-example : Injective φ ↔ ker φ = ⊥ := ker_eq_bot.symm
+theorem C09_S02_3: Injective φ ↔ ker φ = ⊥ := ker_eq_bot.symm
 
-example : Surjective φ ↔ range φ = ⊤ := range_eq_top.symm
+theorem C09_S02_4: Surjective φ ↔ range φ = ⊤ := range_eq_top.symm
 
 #check Submodule.mem_map_of_mem
 #check Submodule.mem_map
 #check Submodule.mem_comap
 
-example (E : Submodule K V) (F : Submodule K W) :
+theorem C09_S02_5(E : Submodule K V) (F : Submodule K W) :
     Submodule.map φ E ≤ F ↔ E ≤ Submodule.comap φ F := by
   constructor
   · intro h x hx
@@ -90,17 +90,17 @@ example (E : Submodule K V) (F : Submodule K W) :
 
 variable (E : Submodule K V)
 
-example : Module K (V ⧸ E) := inferInstance
+-- theorem C09_S02_6: Module K (V ⧸ E) := inferInstance
 
-example : V →ₗ[K] V ⧸ E := E.mkQ
+-- theorem C09_S02_7: V →ₗ[K] V ⧸ E := E.mkQ
 
-example : ker E.mkQ = E := E.ker_mkQ
+theorem C09_S02_8: ker E.mkQ = E := E.ker_mkQ
 
-example : range E.mkQ = ⊤ := E.range_mkQ
+theorem C09_S02_9: range E.mkQ = ⊤ := E.range_mkQ
 
-example (hφ : E ≤ ker φ) : V ⧸ E →ₗ[K] W := E.liftQ φ hφ
+-- theorem C09_S02_10(hφ : E ≤ ker φ) : V ⧸ E →ₗ[K] W := E.liftQ φ hφ
 
-example (F : Submodule K W) (hφ : E ≤ .comap φ F) : V ⧸ E →ₗ[K] W ⧸ F := E.mapQ F φ hφ
+-- theorem C09_S02_11(F : Submodule K W) (hφ : E ≤ .comap φ F) : V ⧸ E →ₗ[K] W ⧸ F := E.mapQ F φ hφ
 
 noncomputable example : (V ⧸ LinearMap.ker φ) ≃ₗ[K] range φ := φ.quotKerEquivRange
 
@@ -110,19 +110,19 @@ open Submodule
 #check Submodule.map_comap_eq
 #check Submodule.comap_map_eq
 
-example : Submodule K (V ⧸ E) ≃ { F : Submodule K V // E ≤ F } where
-  toFun F := ⟨comap E.mkQ F, by
-    conv_lhs => rw [← E.ker_mkQ, ← comap_bot]
-    gcongr
-    apply bot_le⟩
-  invFun P := map E.mkQ P
-  left_inv P := by
-    dsimp
-    rw [Submodule.map_comap_eq, E.range_mkQ]
-    exact top_inf_eq P
-  right_inv := by
-    intro P
-    ext x
-    dsimp only
-    rw [Submodule.comap_map_eq, E.ker_mkQ, sup_of_le_left]
-    exact P.2
+-- theorem C09_S02_12: Submodule K (V ⧸ E) ≃ { F : Submodule K V // E ≤ F } where
+--   toFun F := ⟨comap E.mkQ F, by
+--     conv_lhs => rw [← E.ker_mkQ, ← comap_bot]
+--     gcongr
+--     apply bot_le⟩
+--   invFun P := map E.mkQ P
+--   left_inv P := by
+--     dsimp
+--     rw [Submodule.map_comap_eq, E.range_mkQ]
+--     exact top_inf_eq P
+--   right_inv := by
+--     intro P
+--     ext x
+--     dsimp only
+--     rw [Submodule.comap_map_eq, E.ker_mkQ, sup_of_le_left]
+--     exact P.2

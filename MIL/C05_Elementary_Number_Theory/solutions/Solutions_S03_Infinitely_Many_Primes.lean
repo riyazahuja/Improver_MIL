@@ -56,22 +56,22 @@ open Finset
 section
 variable {α : Type*} [DecidableEq α] (r s t : Finset α)
 
-example : (r ∪ s) ∩ (r ∪ t) = r ∪ s ∩ t := by
+theorem C05_S03_0: (r ∪ s) ∩ (r ∪ t) = r ∪ s ∩ t := by
   ext x
   rw [mem_inter, mem_union, mem_union, mem_union, mem_inter]
   tauto
 
-example : (r ∪ s) ∩ (r ∪ t) = r ∪ s ∩ t := by
+theorem C05_S03_1: (r ∪ s) ∩ (r ∪ t) = r ∪ s ∩ t := by
   ext x
   simp
   tauto
 
-example : (r \ s) \ t = r \ (s ∪ t) := by
+theorem C05_S03_2: (r \ s) \ t = r \ (s ∪ t) := by
   ext x
   rw [mem_sdiff, mem_sdiff, mem_sdiff, mem_union]
   tauto
 
-example : (r \ s) \ t = r \ (s ∪ t) := by
+theorem C05_S03_3: (r \ s) \ t = r \ (s ∪ t) := by
   ext x
   simp
   tauto

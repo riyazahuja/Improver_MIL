@@ -14,15 +14,15 @@ variable {W : Type*} [AddCommGroup W] [Module K W]
 
 open Polynomial Module LinearMap
 
-example (φ ψ : End K V) : φ * ψ = φ ∘ₗ ψ :=
+theorem C09_S03_0(φ ψ : End K V) : φ * ψ = φ ∘ₗ ψ :=
   LinearMap.mul_eq_comp φ ψ -- `rfl` would also work
 
--- evaluating `P` on `φ`
-example (P : K[X]) (φ : End K V) : V →ₗ[K] V :=
-  aeval φ P
+-- -- evaluating `P` on `φ`
+-- theorem C09_S03_1(P : K[X]) (φ : End K V) : V →ₗ[K] V :=
+--   aeval φ P
 
 -- evaluating `X` on `φ` gives back `φ`
-example (φ : End K V) : aeval φ (X : K[X]) = φ :=
+theorem C09_S03_2(φ : End K V) : aeval φ (X : K[X]) = φ :=
   aeval_X φ
 
 
@@ -31,7 +31,7 @@ example (φ : End K V) : aeval φ (X : K[X]) = φ :=
 #check Submodule.mem_inf
 #check LinearMap.mem_ker
 
-example (P Q : K[X]) (h : IsCoprime P Q) (φ : End K V) : ker (aeval φ P) ⊓ ker (aeval φ Q) = ⊥ := by
+theorem C09_S03_3(P Q : K[X]) (h : IsCoprime P Q) (φ : End K V) : ker (aeval φ P) ⊓ ker (aeval φ Q) = ⊥ := by
   rw [Submodule.eq_bot_iff]
   rintro x hx
   rw [Submodule.mem_inf, mem_ker, mem_ker] at hx
@@ -44,7 +44,7 @@ example (P Q : K[X]) (h : IsCoprime P Q) (φ : End K V) : ker (aeval φ P) ⊓ k
 #check LinearMap.mul_apply
 #check LinearMap.ker_le_ker_comp
 
-example (P Q : K[X]) (h : IsCoprime P Q) (φ : End K V) :
+theorem C09_S03_4(P Q : K[X]) (h : IsCoprime P Q) (φ : End K V) :
     ker (aeval φ P) ⊔ ker (aeval φ Q) = ker (aeval φ (P*Q)) := by
   apply le_antisymm
   · apply sup_le
@@ -64,4 +64,3 @@ example (P Q : K[X]) (h : IsCoprime P Q) (φ : End K V) :
           map_zero]
     · rw [← mul_apply, ← map_mul, show Q*(U*P) = U*(P*Q) by ring, map_mul, mul_apply, hx,
           map_zero]
-

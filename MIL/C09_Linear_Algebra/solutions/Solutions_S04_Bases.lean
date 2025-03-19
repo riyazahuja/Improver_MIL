@@ -34,7 +34,7 @@ variable {W : Type*} [AddCommGroup W] [Module K W]
 
 #check (B.constr K u : V →ₗ[K] W)
 
-example (i : ι) : B.constr K u (B i) = u i :=
+theorem C09_S04_0(i : ι) : B.constr K u (B i) = u i :=
   B.constr_basis K u i
 
 
@@ -47,13 +47,13 @@ open LinearMap
 
 open Matrix -- get access to the ``*ᵥ`` notation for multiplication between matrices and vectors.
 
-example (φ : V →ₗ[K] W) (v : V) : (toMatrix B B' φ) *ᵥ (B.repr v) = B'.repr (φ v) :=
+theorem C09_S04_1(φ : V →ₗ[K] W) (v : V) : (toMatrix B B' φ) *ᵥ (B.repr v) = B'.repr (φ v) :=
   toMatrix_mulVec_repr B B' φ v
 
 
 variable {ι'' : Type*} (B'' : Basis ι'' K W) [Fintype ι''] [DecidableEq ι'']
 
-example (φ : V →ₗ[K] W) : (toMatrix B B'' φ) = (toMatrix B' B'' .id) * (toMatrix B B' φ) := by
+theorem C09_S04_2(φ : V →ₗ[K] W) : (toMatrix B B'' φ) = (toMatrix B' B'' .id) * (toMatrix B B' φ) := by
   simp
 
 end
@@ -71,7 +71,7 @@ open Module LinearMap Matrix
 #check Matrix.det_mul
 #check Matrix.det_one
 
-example [Fintype ι] (B' : Basis ι K V) (φ : End K V) :
+theorem C09_S04_3[Fintype ι] (B' : Basis ι K V) (φ : End K V) :
     (toMatrix B B φ).det = (toMatrix B' B' φ).det := by
   set M := toMatrix B B φ
   set M' := toMatrix B' B' φ
@@ -92,12 +92,12 @@ variable (E F : Submodule K V) [FiniteDimensional K V]
 
 open Module
 
-example : finrank K (E ⊔ F : Submodule K V) + finrank K (E ⊓ F : Submodule K V) =
+theorem C09_S04_4: finrank K (E ⊔ F : Submodule K V) + finrank K (E ⊓ F : Submodule K V) =
     finrank K E + finrank K F :=
   Submodule.finrank_sup_add_finrank_inf_eq E F
 
-example : finrank K E ≤ finrank K V := Submodule.finrank_le E
-example (h : finrank K V < finrank K E + finrank K F) :
+theorem C09_S04_5: finrank K E ≤ finrank K V := Submodule.finrank_le E
+theorem C09_S04_6(h : finrank K V < finrank K E + finrank K F) :
     Nontrivial (E ⊓ F : Submodule K V) := by
   rw [← finrank_pos_iff (R := K)]
   have := Submodule.finrank_sup_add_finrank_inf_eq E F

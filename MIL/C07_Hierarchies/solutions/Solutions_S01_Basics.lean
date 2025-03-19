@@ -19,16 +19,16 @@ class One₁ (α : Type) where
 #check One₂.one
 
 
-example (α : Type) [One₁ α] : α := One₁.one
+-- theorem C07_S01_0(α : Type) [One₁ α] : α := One₁.one
 
-example (α : Type) [One₁ α] := (One₁.one : α)
+-- theorem C07_S01_1(α : Type) [One₁ α] := (One₁.one : α)
 
 @[inherit_doc]
 notation "𝟙" => One₁.one
 
-example {α : Type} [One₁ α] : α := 𝟙
+-- theorem C07_S01_2{α : Type} [One₁ α] : α := 𝟙
 
-example {α : Type} [One₁ α] : (𝟙 : α) = 𝟙 := rfl
+theorem C07_S01_3{α : Type} [One₁ α] : (𝟙 : α) = 𝟙 := rfl
 
 
 class Dia₁ (α : Type) where
@@ -45,14 +45,14 @@ class Semigroup₁ (α : Type) where
 
 attribute [instance] Semigroup₁.toDia₁
 
-example {α : Type} [Semigroup₁ α] (a b : α) : α := a ⋄ b
+-- theorem C07_S01_4{α : Type} [Semigroup₁ α] (a b : α) : α := a ⋄ b
 
 
 class Semigroup₂ (α : Type) extends Dia₁ α where
   /-- Diamond is associative -/
   dia_assoc : ∀ a b c : α, a ⋄ b ⋄ c = a ⋄ (b ⋄ c)
 
-example {α : Type} [Semigroup₂ α] (a b : α) : α := a ⋄ b
+-- theorem C07_S01_5{α : Type} [Semigroup₂ α] (a b : α) : α := a ⋄ b
 
 class DiaOneClass₁ (α : Type) extends One₁ α, Dia₁ α where
   /-- One is a left neutral element for diamond. -/
@@ -63,7 +63,7 @@ class DiaOneClass₁ (α : Type) extends One₁ α, Dia₁ α where
 
 
 set_option trace.Meta.synthInstance true in
-example {α : Type} [DiaOneClass₁ α] (a b : α) : Prop := a ⋄ b = 𝟙
+-- theorem C07_S01_6{α : Type} [DiaOneClass₁ α] (a b : α) : Prop := a ⋄ b = 𝟙
 
 
 class Monoid₁ (α : Type) extends Semigroup₁ α, DiaOneClass₁ α
@@ -74,7 +74,7 @@ class Monoid₂ (α : Type) where
   toDiaOneClass₁ : DiaOneClass₁ α
 
 
-example {α : Type} [Monoid₁ α] :
+theorem C07_S01_7{α : Type} [Monoid₁ α] :
   (Monoid₁.toSemigroup₁.toDia₁.dia : α → α → α) = Monoid₁.toDiaOneClass₁.toDia₁.dia := rfl
 
 
@@ -109,7 +109,7 @@ export Semigroup₁ (dia_assoc)
 export Group₁ (inv_dia)
 
 
-example {M : Type} [Monoid₁ M] {a b c : M} (hba : b ⋄ a = 𝟙) (hac : a ⋄ c = 𝟙) : b = c := by
+theorem C07_S01_8{M : Type} [Monoid₁ M] {a b c : M} (hba : b ⋄ a = 𝟙) (hac : a ⋄ c = 𝟙) : b = c := by
   rw [← one_dia c, ← hba, dia_assoc, hac, dia_one b]
 
 
@@ -334,7 +334,7 @@ instance : AddMonoid₄ ℤ where
   nsmul_succ := fun n m ↦ show (n + 1 : ℤ) * m = m + n * m
     by rw [Int.add_mul, Int.add_comm, Int.one_mul]
 
-example (n : ℕ) (m : ℤ) : SMul.smul (self := mySMul) n m = n * m := rfl
+theorem C07_S01_9(n : ℕ) (m : ℤ) : SMul.smul (self := mySMul) n m = n * m := rfl
 class LT₁ (α : Type) where
   /-- The Less-Than relation -/
   lt : α → α → Prop

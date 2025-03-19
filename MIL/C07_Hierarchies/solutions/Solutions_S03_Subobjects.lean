@@ -20,12 +20,12 @@ instance [Monoid M] : SetLike (Submonoid₁ M) M where
 
 
 
-example [Monoid M] (N : Submonoid₁ M) : 1 ∈ N := N.one_mem
+theorem C07_S03_0[Monoid M] (N : Submonoid₁ M) : 1 ∈ N := N.one_mem
 
-example [Monoid M] (N : Submonoid₁ M) (α : Type) (f : M → α) := f '' N
+-- theorem C07_S03_1[Monoid M] (N : Submonoid₁ M) (α : Type) (f : M → α) := f '' N
 
 
-example [Monoid M] (N : Submonoid₁ M) (x : N) : (x : M) ∈ N := x.property
+theorem C07_S03_2[Monoid M] (N : Submonoid₁ M) (x : N) : (x : M) ∈ N := x.property
 
 
 instance SubMonoid₁Monoid [Monoid M] (N : Submonoid₁ M) : Monoid N where
@@ -36,12 +36,12 @@ instance SubMonoid₁Monoid [Monoid M] (N : Submonoid₁ M) : Monoid N where
   mul_one := fun x ↦ SetCoe.ext (mul_one (x : M))
 
 
-example [Monoid M] (N : Submonoid₁ M) : Monoid N where
-  mul := fun ⟨x, hx⟩ ⟨y, hy⟩ ↦ ⟨x*y, N.mul_mem hx hy⟩
-  mul_assoc := fun ⟨x, _⟩ ⟨y, _⟩ ⟨z, _⟩ ↦ SetCoe.ext (mul_assoc x y z)
-  one := ⟨1, N.one_mem⟩
-  one_mul := fun ⟨x, _⟩ ↦ SetCoe.ext (one_mul x)
-  mul_one := fun ⟨x, _⟩ ↦ SetCoe.ext (mul_one x)
+-- theorem C07_S03_3[Monoid M] (N : Submonoid₁ M) : Monoid N where
+--   mul := fun ⟨x, hx⟩ ⟨y, hy⟩ ↦ ⟨x*y, N.mul_mem hx hy⟩
+--   mul_assoc := fun ⟨x, _⟩ ⟨y, _⟩ ⟨z, _⟩ ↦ SetCoe.ext (mul_assoc x y z)
+--   one := ⟨1, N.one_mem⟩
+--   one_mul := fun ⟨x, _⟩ ↦ SetCoe.ext (one_mul x)
+--   mul_one := fun ⟨x, _⟩ ↦ SetCoe.ext (mul_one x)
 
 
 class SubmonoidClass₁ (S : Type) (M : Type) [Monoid M] [SetLike S M] : Prop where
@@ -88,7 +88,7 @@ instance [Monoid M] : Min (Submonoid₁ M) :=
       mul_mem := fun ⟨hx, hx'⟩ ⟨hy, hy'⟩ ↦ ⟨S₁.mul_mem hx hy, S₂.mul_mem hx' hy'⟩ }⟩
 
 
-example [Monoid M] (N P : Submonoid₁ M) : Submonoid₁ M := N ⊓ P
+-- theorem C07_S03_4[Monoid M] (N P : Submonoid₁ M) : Submonoid₁ M := N ⊓ P
 
 
 def Submonoid.Setoid [CommMonoid M] (N : Submonoid M) : Setoid M  where

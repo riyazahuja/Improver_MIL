@@ -29,12 +29,12 @@ variable {G H : Type*} [Group G] [Group H]
 
 open Subgroup
 
-example (φ : G →* H) (S T : Subgroup H) (hST : S ≤ T) : comap φ S ≤ comap φ T := by
+theorem C08_S01_0(φ : G →* H) (S T : Subgroup H) (hST : S ≤ T) : comap φ S ≤ comap φ T := by
   intro x hx
   rw [mem_comap] at * -- Lean does not need this line
   exact hST hx
 
-example (φ : G →* H) (S T : Subgroup G) (hST : S ≤ T) : map φ S ≤ map φ T := by
+theorem C08_S01_1(φ : G →* H) (S T : Subgroup G) (hST : S ≤ T) : map φ S ≤ map φ T := by
   intro x hx
   rw [mem_map] at * -- Lean does not need this line
   rcases hx with ⟨y, hy, rfl⟩
@@ -43,7 +43,7 @@ example (φ : G →* H) (S T : Subgroup G) (hST : S ≤ T) : map φ S ≤ map φ
 variable {K : Type*} [Group K]
 
 -- Remember you can use the `ext` tactic to prove an equality of subgroups.
-example (φ : G →* H) (ψ : H →* K) (U : Subgroup K) :
+theorem C08_S01_2(φ : G →* H) (ψ : H →* K) (U : Subgroup K) :
     comap (ψ.comp φ) U = comap φ (comap ψ U) := by
   -- The whole proof could be ``rfl``, but let's decompose it a bit.
   ext x
@@ -52,7 +52,7 @@ example (φ : G →* H) (ψ : H →* K) (U : Subgroup K) :
 
 -- Pushing a subgroup along one homomorphism and then another is equal to
 -- pushing it forward along the composite of the homomorphisms.
-example (φ : G →* H) (ψ : H →* K) (S : Subgroup G) :
+theorem C08_S01_3(φ : G →* H) (ψ : H →* K) (S : Subgroup G) :
     map (ψ.comp φ) S = map ψ (S.map φ) := by
   ext x
   simp only [mem_map]

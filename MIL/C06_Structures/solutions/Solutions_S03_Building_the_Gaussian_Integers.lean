@@ -285,7 +285,7 @@ instance : EuclideanDomain GaussInt :=
     remainder_lt := natAbs_norm_mod_lt
     mul_left_not_lt := not_norm_mul_left_lt_norm }
 
-example (x : GaussInt) : Irreducible x ↔ Prime x :=
+theorem C06_S03_0(x : GaussInt) : Irreducible x ↔ Prime x :=
   irreducible_iff_prime
 
 end GaussInt

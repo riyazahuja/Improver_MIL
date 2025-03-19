@@ -6,7 +6,7 @@ theorem even_of_even_sqr {m : ℕ} (h : 2 ∣ m ^ 2) : 2 ∣ m := by
   rw [pow_two, Nat.prime_two.dvd_mul] at h
   cases h <;> assumption
 
-example {m n : ℕ} (coprime_mn : m.Coprime n) : m ^ 2 ≠ 2 * n ^ 2 := by
+theorem C05_S01_0{m n : ℕ} (coprime_mn : m.Coprime n) : m ^ 2 ≠ 2 * n ^ 2 := by
   intro sqr_eq
   have : 2 ∣ m := by
     apply even_of_even_sqr
@@ -31,7 +31,7 @@ example {m n : ℕ} (coprime_mn : m.Coprime n) : m ^ 2 ≠ 2 * n ^ 2 := by
     exact coprime_mn
   norm_num at this
 
-example {m n p : ℕ} (coprime_mn : m.Coprime n) (prime_p : p.Prime) : m ^ 2 ≠ p * n ^ 2 := by
+theorem C05_S01_1{m n p : ℕ} (coprime_mn : m.Coprime n) (prime_p : p.Prime) : m ^ 2 ≠ p * n ^ 2 := by
   intro sqr_eq
   have : p ∣ m := by
     apply prime_p.dvd_of_dvd_pow
@@ -73,7 +73,7 @@ theorem Nat.Prime.factorization' {p : ℕ} (prime_p : p.Prime) :
   rw [prime_p.factorization]
   simp
 
-example {m n p : ℕ} (nnz : n ≠ 0) (prime_p : p.Prime) : m ^ 2 ≠ p * n ^ 2 := by
+theorem C05_S01_2{m n p : ℕ} (nnz : n ≠ 0) (prime_p : p.Prime) : m ^ 2 ≠ p * n ^ 2 := by
   intro sqr_eq
   have nsqr_nez : n ^ 2 ≠ 0 := by simpa
   have eq1 : Nat.factorization (m ^ 2) p = 2 * m.factorization p := by
@@ -86,7 +86,7 @@ example {m n p : ℕ} (nnz : n ≠ 0) (prime_p : p.Prime) : m ^ 2 ≠ p * n ^ 2 
   rw [add_comm, Nat.add_mul_mod_self_left, Nat.mul_mod_right] at this
   norm_num at this
 
-example {m n k r : ℕ} (nnz : n ≠ 0) (pow_eq : m ^ k = r * n ^ k) {p : ℕ} :
+theorem C05_S01_3{m n k r : ℕ} (nnz : n ≠ 0) (pow_eq : m ^ k = r * n ^ k) {p : ℕ} :
     k ∣ r.factorization p := by
   rcases r with _ | r
   · simp

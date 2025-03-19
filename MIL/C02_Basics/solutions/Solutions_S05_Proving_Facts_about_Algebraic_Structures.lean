@@ -5,14 +5,14 @@ section
 variable {α : Type*} [Lattice α]
 variable (x y z : α)
 
-example : x ⊓ y = y ⊓ x := by
+theorem C02_S05_0: x ⊓ y = y ⊓ x := by
   apply le_antisymm
   repeat
     apply le_inf
     · apply inf_le_right
     apply inf_le_left
 
-example : x ⊓ y ⊓ z = x ⊓ (y ⊓ z) := by
+theorem C02_S05_1: x ⊓ y ⊓ z = x ⊓ (y ⊓ z) := by
   apply le_antisymm
   · apply le_inf
     · trans x ⊓ y
@@ -33,14 +33,14 @@ example : x ⊓ y ⊓ z = x ⊓ (y ⊓ z) := by
   apply inf_le_right
   apply inf_le_right
 
-example : x ⊔ y = y ⊔ x := by
+theorem C02_S05_2: x ⊔ y = y ⊔ x := by
   apply le_antisymm
   repeat
     apply sup_le
     · apply le_sup_right
     apply le_sup_left
 
-example : x ⊔ y ⊔ z = x ⊔ (y ⊔ z) := by
+theorem C02_S05_3: x ⊔ y ⊔ z = x ⊔ (y ⊔ z) := by
   apply le_antisymm
   · apply sup_le
     · apply sup_le
@@ -91,11 +91,11 @@ section
 variable {α : Type*} [Lattice α]
 variable (a b c : α)
 
-example (h : ∀ x y z : α, x ⊓ (y ⊔ z) = x ⊓ y ⊔ x ⊓ z) : a ⊔ b ⊓ c = (a ⊔ b) ⊓ (a ⊔ c) := by
+theorem C02_S05_4(h : ∀ x y z : α, x ⊓ (y ⊔ z) = x ⊓ y ⊔ x ⊓ z) : a ⊔ b ⊓ c = (a ⊔ b) ⊓ (a ⊔ c) := by
   rw [h, @inf_comm _ _ (a ⊔ b), absorb1, @inf_comm _ _ (a ⊔ b), h, ← sup_assoc, @inf_comm _ _ c a,
     absorb2, inf_comm]
 
-example (h : ∀ x y z : α, x ⊔ y ⊓ z = (x ⊔ y) ⊓ (x ⊔ z)) : a ⊓ (b ⊔ c) = a ⊓ b ⊔ a ⊓ c := by
+theorem C02_S05_5(h : ∀ x y z : α, x ⊔ y ⊓ z = (x ⊔ y) ⊓ (x ⊔ z)) : a ⊓ (b ⊔ c) = a ⊓ b ⊔ a ⊓ c := by
   rw [h, @sup_comm _ _ (a ⊓ b), absorb2, @sup_comm _ _ (a ⊓ b), h, ← inf_assoc, @sup_comm _ _ c a,
     absorb1, sup_comm]
 
@@ -113,7 +113,7 @@ theorem aux2 (h : 0 ≤ b - a) : a ≤ b := by
   rw [← add_zero a, ← sub_add_cancel b a, add_comm (b - a)]
   apply add_le_add_left h
 
-example (h : a ≤ b) (h' : 0 ≤ c) : a * c ≤ b * c := by
+theorem C02_S05_6(h : a ≤ b) (h' : 0 ≤ c) : a * c ≤ b * c := by
   have h1 : 0 ≤ (b - a) * c := mul_nonneg (aux1 _ _ h) h'
   rw [sub_mul] at h1
   exact aux2 _ _ h1
@@ -124,7 +124,7 @@ section
 variable {X : Type*} [MetricSpace X]
 variable (x y z : X)
 
-example (x y : X) : 0 ≤ dist x y :=by
+theorem C02_S05_7(x y : X) : 0 ≤ dist x y :=by
   have : 0 ≤ dist x y + dist y x := by
     rw [← dist_self x]
     apply dist_triangle

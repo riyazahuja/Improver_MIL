@@ -9,7 +9,7 @@ def isMonoidHom₁ [Monoid G] [Monoid H] (f : G → H) : Prop :=
 structure isMonoidHom₂ [Monoid G] [Monoid H] (f : G → H) : Prop where
   map_one : f 1 = 1
   map_mul : ∀ g g', f (g * g') = f g * f g'
-example : Continuous (id : ℝ → ℝ) := continuous_id
+theorem C07_S02_0: Continuous (id : ℝ → ℝ) := continuous_id
 @[ext]
 structure MonoidHom₁ (G H : Type) [Monoid G] [Monoid H]  where
   toFun : G → H
@@ -22,7 +22,7 @@ instance [Monoid G] [Monoid H] : CoeFun (MonoidHom₁ G H) (fun _ ↦ G → H) w
 attribute [coe] MonoidHom₁.toFun
 
 
-example [Monoid G] [Monoid H] (f : MonoidHom₁ G H) : f 1 = 1 :=  f.map_one
+theorem C07_S02_1[Monoid G] [Monoid H] (f : MonoidHom₁ G H) : f 1 = 1 :=  f.map_one
 
 @[ext]
 structure AddMonoidHom₁ (G H : Type) [AddMonoid G] [AddMonoid H]  where
@@ -76,10 +76,10 @@ lemma map_inv_of_inv [Monoid M] [Monoid N] [MonoidHomClass₂ F M N] (f : F) {m 
     f m * f m' = 1 := by
   rw [← MonoidHomClass₂.map_mul, h, MonoidHomClass₂.map_one]
 
-example [Monoid M] [Monoid N] (f : MonoidHom₁ M N) {m m' : M} (h : m*m' = 1) : f m * f m' = 1 :=
+theorem C07_S02_2[Monoid M] [Monoid N] (f : MonoidHom₁ M N) {m m' : M} (h : m*m' = 1) : f m * f m' = 1 :=
 map_inv_of_inv f h
 
-example [Ring R] [Ring S] (f : RingHom₁ R S) {r r' : R} (h : r*r' = 1) : f r * f r' = 1 :=
+theorem C07_S02_3[Ring R] [Ring S] (f : RingHom₁ R S) {r r' : R} (h : r*r' = 1) : f r * f r' = 1 :=
 map_inv_of_inv f h
 
 
